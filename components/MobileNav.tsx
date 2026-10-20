@@ -18,7 +18,7 @@ export default function MobileNav() {
   return (
     <section className="w-full max-w-66">
       <Sheet>
-        <SheetTrigger asChild>
+        <SheetTrigger aschild="true">
           <Image
             src="/icons/hamburger.svg"
             alt="Open Menu"
@@ -34,13 +34,13 @@ export default function MobileNav() {
           </Link>
 
           <div className="flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto">
-            <SheetClose asChild>
+            <SheetClose aschild="true">
               <section className="flex h-full flex-col gap-6 pt-16">
                 {sidebarLinks.map((link) => {
                   const isActive = pathName === link.route
 
                   return (
-                    <SheetClose asChild key={link.route}>
+                    <SheetClose aschild="true" key={link.route}>
                       <Link
                         href={link.route}
                         key={link.label}
