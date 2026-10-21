@@ -3,7 +3,13 @@ import { Geist, Geist_Mono, Inter, Lora } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import { ClerkProvider, Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
+import {
+  ClerkProvider,
+  Show,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@clerk/nextjs"
 
 const loraHeading = Lora({ subsets: ["latin"], variable: "--font-heading" })
 
@@ -31,24 +37,24 @@ export default function RootLayout({
         loraHeading.variable
       )}
     >
-      <body>
-        <ClerkProvider
+      <ClerkProvider
         appearance={{
           options: {
-            logoImageUrl: '/icons/my-meeting-logo.svg',
-            socialButtonsVariant: 'iconButton',
+            logoImageUrl: "/icons/my-meeting-logo.svg",
+            socialButtonsVariant: "iconButton",
           },
 
           variables: {
-            colorPrimary: '#193cb8',
-            colorBackground: '#161b1d',
-            colorInput: '#27272a',
-          }
+            colorPrimary: "#193cb8",
+            colorBackground: "#161b1d",
+            colorInput: "#27272a",
+          },
         }}
-        >
+      >
+        <body>
           <ThemeProvider>{children}</ThemeProvider>
-        </ClerkProvider>
-      </body>
+        </body>
+      </ClerkProvider>
     </html>
   )
 }
