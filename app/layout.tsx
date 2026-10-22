@@ -1,15 +1,8 @@
 import { Geist, Geist_Mono, Inter, Lora } from "next/font/google"
-
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import {
-  ClerkProvider,
-  Show,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs"
+import { ClerkProvider } from "@clerk/nextjs"
 import { Toaster } from "@/components/ui/toast"
 
 const loraHeading = Lora({ subsets: ["latin"], variable: "--font-heading" })

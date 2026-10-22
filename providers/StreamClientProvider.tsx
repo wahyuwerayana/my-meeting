@@ -17,7 +17,8 @@ export default function StreamVideoProvider({
   const { user, isLoaded } = useUser();
 
   useEffect(() => {
-    if(!isLoaded || !user) return;  
+    if(!isLoaded || !user) return;
+    if(videoClient) return;
     if(!apiKey) throw new Error('Stream API key is missing');
 
     const client = new StreamVideoClient({
@@ -31,7 +32,7 @@ export default function StreamVideoProvider({
     })
 
     setVideoClient(client);
-  }, [user, isLoaded]);
+  }, [user?.id, isLoaded]);
 
   if(!videoClient) return <Loader />
 
