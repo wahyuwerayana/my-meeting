@@ -10,6 +10,7 @@ import {
   SignUpButton,
   UserButton,
 } from "@clerk/nextjs"
+import { Toaster } from "@/components/ui/toast"
 
 const loraHeading = Lora({ subsets: ["latin"], variable: "--font-heading" })
 
@@ -52,7 +53,10 @@ export default function RootLayout({
         }}
       >
         <body>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            {children}
+            <Toaster />
+          </ThemeProvider>
         </body>
       </ClerkProvider>
     </html>
