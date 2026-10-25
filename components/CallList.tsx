@@ -3,9 +3,10 @@
 import { useGetCalls } from "@/hooks/useGetCalls"
 import { Call, CallRecording } from "@stream-io/video-react-sdk"
 import { useRouter } from "next/navigation"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import MeetingCard from "./MeetingCard"
 import Loader from "./Loader"
+import { toast } from "./ui/toast"
 
 export default function CallList({
   type,
@@ -42,8 +43,28 @@ export default function CallList({
     }
   }
 
+  useEffect(() => {
+    async function fetchRecordings() {
+      try {
+        const callData = await Promise.all(
+          callRecordings.map((meeting) => meeting.listRecordings())
+        )
+
+        const recordings = callData
+          .filter((call) => call.recordings.length > 0)
+          .flatMap((call) => call.recordings)
+
+        setRecordings(recordings)
+      } catch (error) {
+        console.log("Error fetching recordings:", error)
+        toast.add({ title: "Error fetching recordings", type: "error" })
+      }
+    }
+
+    if (type === "recordings") fetchRecordings()
+  }, [type, callRecordings])
+
   const calls = getCalls()
-  const noCallsMessage = getNoCallsMessage()
 
   if (isLoading) return <Loader />
 
@@ -57,14 +78,31 @@ export default function CallList({
               type === "ended" ? "/icons/previous.svg" : `/icons/${type}.svg`
             }
             title={
-              (meeting as Call).state.custom.description.substring(0, 20) ||
+              (meeting as Call).state?.custom.description.substring(0, 26) ||
+              (meeting as CallRecording).filename.substring(0, 20) ||
               "No Title"
             }
             date={
-              (meeting as Call).state.startsAt?.toLocaleString() ||
-              (meeting as CallRecording).start_time.toLocaleString()
+              (meeting as Call).state?.startsAt?.toLocaleString("en-ID", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "numeric",
+              }) ||
+              new Date(
+                (meeting as CallRecording).start_time?.toString()
+              ).toLocaleString("en-ID", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "2-digit",
+                minute: "numeric",
+              })
             }
-            isPreviousMeeting={false}
+            isPreviousMeeting={type === "ended"}
             buttonIcon1={type === "recordings" ? "/icons/play.svg" : undefined}
             buttonText={type === "recordings" ? "Play" : "Start"}
             handleClick={
@@ -80,7 +118,7 @@ export default function CallList({
           />
         ))
       ) : (
-        <h1>{noCallsMessage}</h1>
+        <h1>{getNoCallsMessage()}</h1>
       )}
     </div>
   )

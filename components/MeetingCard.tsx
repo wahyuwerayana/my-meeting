@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image"
 import React from "react"
 import { cn } from "@/lib/utils"
@@ -37,8 +39,8 @@ export default function MeetingCard({
           </div>
         </div>
       </article>
-      <article className={cn("relative flex justify-center", {})}>
-        <div className="relative flex w-full max-sm:hidden">
+      <article className="relative flex justify-between">
+        <div className="relative flex max-sm:hidden">
           {avatarImages.map((img, index) => (
             <Image
               key={index}
@@ -47,10 +49,10 @@ export default function MeetingCard({
               width={40}
               height={40}
               className={cn("rounded-full", { absolute: index > 0 })}
-              style={{ top: 0, left: index * 28 }}
+              style={{ top: 0, left: index * 20 }}
             />
           ))}
-          <div className="flex-center absolute left-34 size-10 rounded-full border-[5px]">
+          <div className="flex-center absolute left-26 size-10 rounded-full border-[5px]">
             +5
           </div>
         </div>
@@ -70,7 +72,7 @@ export default function MeetingCard({
               className="bg-accent px-6"
             >
               <Image src="/icons/copy.svg" alt="copy" width={20} height={20} />
-              &nbsp;Copy Link
+              &nbsp; Copy Link
             </Button>
           </div>
         )}

@@ -1,3 +1,4 @@
+import CallList from '@/components/CallList'
 import React from 'react'
 
 export default function Recordings() {
@@ -7,7 +8,7 @@ export default function Recordings() {
         Recordings
       </h1>
 
-      
+      <CallList type='recordings' />
     </section>
   )
 }
