@@ -73,14 +73,14 @@ export default function CallList({
       {calls && calls.length > 0 ? (
         calls.map((meeting: Call | CallRecording) => (
           <MeetingCard
-            key={(meeting as Call).id}
+            key={(meeting as Call).id || (meeting as CallRecording).session_id}
             icon={
               type === "ended" ? "/icons/previous.svg" : `/icons/${type}.svg`
             }
             title={
-              (meeting as Call).state?.custom.description.substring(0, 26) ||
-              (meeting as CallRecording).filename.substring(0, 20) ||
-              "No Title"
+              (meeting as Call).state?.custom?.description?.substring(0, 26) ||
+              (meeting as CallRecording).filename?.substring(0, 20) ||
+              "Personal Meeting"
             }
             date={
               (meeting as Call).state?.startsAt?.toLocaleString("en-ID", {

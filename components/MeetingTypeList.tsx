@@ -24,7 +24,7 @@ export default function MeetingTypeList() {
   })
   const [callDetails, setCallDetails] = useState<Call>()
 
-  const createMeeting = async () => {
+  async function createMeeting() {
     if (!client || !user) return
 
     try {
