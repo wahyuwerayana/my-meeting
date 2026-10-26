@@ -10,9 +10,9 @@ import React from "react"
 
 function Table({ title, description }: { title: string; description: string }) {
   return (
-    <div className="flex flex-col items-start gap-2 xl:flex-row">
+    <div className="flex flex-col items-start gap-2 xl:flex-row min-w-0 w-full">
       <h1 className="text-base font-medium lg:text-xl xl:min-w-32">{title}:</h1>
-      <h1 className="truncate text-sm font-bold max-sm:max-w-[320px] lg:text-xl">
+      <h1 className="break-all text-sm font-bold lg:text-xl">
         {description}
       </h1>
     </div>
@@ -45,7 +45,7 @@ export default function PersonalRoom() {
 
   return (
     <section className="flex size-full flex-col gap-10">
-      <h1 className="text-3xl font-bold">Personal Room</h1>
+      <h1 className="text-xl font-bold lg:text-3xl">Personal Room</h1>
 
       <div className="flex w-full flex-col gap-8 xl:max-w-225">
         <Table title="Topic" description={`${user?.username}'s meeting room`} />

@@ -11,7 +11,7 @@ export default function Sidebar() {
   const pathName = usePathname()
 
   return (
-    <section className="sticky top-0 left-0 flex h-screen w-fit flex-col justify-between bg-popover p-6 pt-28 max-sm:hidden lg:w-66">
+    <section className="sticky top-0 left-0 flex h-screen w-fit flex-col justify-between bg-popover p-6 pt-28 max-sm:hidden lg:w-66 shrink-0">
       <div className="flex flex-1 flex-col gap-6">
         {sidebarLinks.map((link) => {
           const isActive =

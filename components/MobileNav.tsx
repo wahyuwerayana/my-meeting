@@ -18,29 +18,34 @@ export default function MobileNav() {
   return (
     <section className="w-full max-w-66">
       <Sheet>
-        <SheetTrigger aschild="true">
-          <Image
-            src="/icons/hamburger.svg"
-            alt="Open Menu"
-            width={36}
-            height={36}
-            className="sm:hidden"
-          />
-        </SheetTrigger>
-        <SheetContent side="left" className="border-none">
+        <SheetTrigger
+          render={
+            <button className="cursor-pointer sm:hidden">
+              <Image
+                src="/icons/hamburger.svg"
+                alt="Open Menu"
+                width={36}
+                height={36}
+              />
+            </button>
+          }
+        />
+
+        <SheetContent side="left" className="border-none p-2.5">
           <Link href="/" className="flex items-center gap-1">
             <Image src="/icons/logo.svg" alt="Logo" width={32} height={32} />
             <p className="text-[26px] font-extrabold">My Meeting</p>
           </Link>
 
           <div className="flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto">
-            <SheetClose aschild="true">
-              <section className="flex h-full flex-col gap-6 pt-16">
-                {sidebarLinks.map((link) => {
-                  const isActive = pathName === link.route
+            <section className="flex h-full flex-col gap-6 pt-16">
+              {sidebarLinks.map((link) => {
+                const isActive = pathName === link.route
 
-                  return (
-                    <SheetClose aschild="true" key={link.route}>
+                return (
+                  <SheetClose
+                    key={link.route}
+                    render={
                       <Link
                         href={link.route}
                         key={link.label}
@@ -59,11 +64,11 @@ export default function MobileNav() {
                         />
                         <p className="font-semibold">{link.label}</p>
                       </Link>
-                    </SheetClose>
-                  )
-                })}
-              </section>
-            </SheetClose>
+                    }
+                  />
+                )
+              })}
+            </section>
           </div>
         </SheetContent>
       </Sheet>
