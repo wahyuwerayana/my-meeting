@@ -34,7 +34,6 @@ export default function RootLayout({
       <ClerkProvider
         appearance={{
           options: {
-            logoImageUrl: "/icons/my-meeting-logo.svg",
             socialButtonsVariant: "iconButton",
           },
 
